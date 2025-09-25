@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './App.css';
 
-const API_BASE_URL = 'https://file-processor-api.azurewebsites.net';
+// ✅ Use your actual API URL (no trailing slash)
+const API_BASE_URL = 'https://file-processor-api-b4aze4d6adg4gtd3.centralus-01.azurewebsites.net';
 
 function App() {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -11,6 +12,7 @@ function App() {
 
   const fetchFiles = async () => {
     try {
+      // ✅ Correct: /files (no trailing slash)
       const response = await axios.get(`${API_BASE_URL}/files`);
       setFiles(response.data);
     } catch (error) {
@@ -20,7 +22,7 @@ function App() {
 
   useEffect(() => {
     fetchFiles();
-    const interval = setInterval(fetchFiles, 3000); // Poll every 3 seconds
+    const interval = setInterval(fetchFiles, 3000);
     return () => clearInterval(interval);
   }, []);
 
@@ -40,6 +42,7 @@ function App() {
     setUploadStatus('Uploading...');
 
     try {
+      // ✅ Correct: /upload (no trailing slash)
       const response = await axios.post(`${API_BASE_URL}/upload`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' }
       });
@@ -97,4 +100,3 @@ function App() {
 }
 
 export default App;
-
