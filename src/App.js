@@ -40,7 +40,7 @@ function App() {
     setUploadStatus('Uploading...');
 
     try {
-      const response = await axios.post(`${API_BASE_URL}/upload/`, formData, {
+      const response = await axios.post(`${API_BASE_URL}/upload`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' }
       });
       setUploadStatus(`Upload Successful! File ID: ${response.data.id}`);
